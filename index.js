@@ -2,9 +2,6 @@
 const inquirer = require('inquirer');
 const db = require('./db/connection');
 
-// const PORT = process.env.PORT || 3001;
-// const app = express();
-
 // Function to get started
 function startQuery() {
     inquirer.prompt([
@@ -15,7 +12,7 @@ function startQuery() {
             choices:['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role'],
         },
     ])
-}
+
 
     .then ((answers) => {
         switch (answers.options) {
@@ -47,10 +44,15 @@ function startQuery() {
                 updateRole();
                 break;
         }
-    });
+    })
+};
 
 function viewAllDepartments() {
-    db.query('SELECT department.name, department.id');
+    db.promise().query('SELECT department.name, department.id FROM department')
+    .then (function([rows]) {
+        let departments = rows;
+        console.table(departments);
+    })
 }
 
 function viewAllRoles() {
@@ -67,7 +69,7 @@ function addDepartment() {
         {
             type: 'input',
             message: 'Please enter the name of the department.',
-            name: 'departments',
+            name: 'departments'
         }
     ])
 
@@ -84,19 +86,19 @@ function addRole() {
         {
             type: 'input',
             message: 'Please enter the name of the role.',
-            name: 'nameOfRole',
+            name: 'nameOfRole'
         },
 
         {
             type: 'input',
             message: 'Please enter the salary.',
-            name: 'amountOfSalary',
+            name: 'amountOfSalary'
         },
 
         {
             type: 'input',
             message: 'Please enter ID of the department.',
-            name: 'department_id',
+            name: 'department_id'
         }
     ])
 
@@ -113,25 +115,25 @@ function addEmployee() {
         {
             type: 'input',
             message: 'Please enter the first name of the employee.',
-            name: 'first_name',
+            name: 'first_name'
         },
 
         {
             type: 'input',
             message: 'Please enter the last name of the employee.',
-            name: 'last_name',
+            name: 'last_name'
         },
 
         {
             type: 'input',
             message: 'Please enter the role of the employee.',
-            name: 'role_id',
+            name: 'role_id'
         },
 
         {
             type: 'input',
             message: 'Please enter the id for the manager of the employee.',
-            name: 'manager_id',
+            name: 'manager_id'
         }
     ])
 
@@ -150,13 +152,13 @@ function updateRole() {
                 message: 'Please select one of the following employees:',
                 name: 'employeesAll',
                 // Not sure what to put in choices?
-                choices: [employee.id,]
+                choices: [employee.id]
             },
 
             {
                 type: 'input',
                 message: 'Please enter the new role of the employee.',
-                name: 'newRole',
+                name: 'newRole'
             }
         ])
     .then ((answers) => {
@@ -175,4 +177,5 @@ function init() {
     })
 }
 // Call init to initialize app
+startQuery();
 init();
