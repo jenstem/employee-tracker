@@ -94,13 +94,13 @@ function addRole() {
         {
             type: 'input',
             message: 'Please enter the name of the role.',
-            name: 'nameOfRole'
+            name: 'title'
         },
 
         {
             type: 'input',
             message: 'Please enter the salary.',
-            name: 'amountOfSalary'
+            name: 'salary'
         },
 
         {
@@ -111,8 +111,7 @@ function addRole() {
     ])
 
     .then ((answers) => {
-        db.promise().query('INSERT INTO role (nameofRole, amountOfSalary, department_id) VALUES (answers.title, answers.salary, answers.department_id)');
-        [answers.title, answers.salary, answers.department_id],
+        db.query('INSERT INTO role (title, salary, department_id) VALUES (answers.title, answers.salary, answers.department_id)', [answers.title, answers.salary, answers.department_id]);
         console.log('Role has been added.');
     });
 };
