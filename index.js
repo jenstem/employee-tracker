@@ -113,6 +113,7 @@ function addRole() {
     .then ((answers) => {
         db.query('INSERT INTO role (title, salary, department_id) VALUES (answers.title, answers.salary, answers.department_id)', [answers.title, answers.salary, answers.department_id]);
         console.log('Role has been added.');
+        startQuery();
     });
 };
 
