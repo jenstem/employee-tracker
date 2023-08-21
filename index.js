@@ -146,8 +146,7 @@ function addEmployee() {
     ])
 
     .then ((answers) => {
-        db.query('INSERT INTO role (first_name, last_name, role_id, manager_id) VALUES (answers.first_name, answers.last_name, answers.role_id, answers.manager_id)');
-        [answers.first_name, answers.last_name, answers.role_id, answers.manager_id],
+        db.query('INSERT INTO role (first_name, last_name, role_id, manager_id) VALUES (answers.first_name, answers.last_name, answers.role_id, answers.manager_id)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
         console.log('Employee has been added.');
     });
 };
