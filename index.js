@@ -56,11 +56,19 @@ function viewAllDepartments() {
 }
 
 function viewAllRoles() {
-    db.query('SELECT role.title, role.id, department_id, role.salary');
+    db.promise().query('SELECT role.title, role.id, department_id, role.salary FROM role INNER JOIN department ON role.department_id = department_id')
+    .then (function([rowsRole]) {
+        let roles = rowsRole;
+        console.table(roles);
+    })
 }
 
 function viewAllEmployees() {
-    db.query('SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, department_id, role.salary', 'employee.manager_id');
+    db.promise().query('SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, department_id, role.salary, employee.manager_id FROM employee INNER JOIN department ON employee.department_id = department_id INNER JOIN role ON employee.role_id = role.id INNER JOIN role ON employee.role.salary = role.salary')
+    .then (function([rowsEmployee]) {
+        let employeesEl = rowsEmployee;
+        console.table(employeesEl);
+    })
 }
 
 // Function add a department
@@ -103,7 +111,7 @@ function addRole() {
     ])
 
     .then ((answers) => {
-        db.query('INSERT INTO role (nameofRole, amountOfSalary, department_id) VALUES (answers.title, answers.salary, answers.department_id)');
+        db.promise().query('INSERT INTO role (nameofRole, amountOfSalary, department_id) VALUES (answers.title, answers.salary, answers.department_id)');
         [answers.title, answers.salary, answers.department_id],
         console.log('Role has been added.');
     });
