@@ -162,7 +162,6 @@ function updateRole() {
             }
         ])
     .then ((answers) => {
-        // Unsure about this:
         db.query('UPDATE employee (employeesAll, newRole) VALUES (answers.employee.id, answers.role_id)');
         [answers.first_name, answers.last_name, answers.role_id, answers.manager_id],
         console.log("Employee's role has been updated.");
@@ -178,4 +177,3 @@ function init() {
 }
 // Call init to initialize app
 startQuery();
-// init();
