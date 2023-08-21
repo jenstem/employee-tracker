@@ -172,6 +172,7 @@ function updateRole() {
         db.query('UPDATE employee (employeesAll, newRole) VALUES (answers.employee.id, answers.role_id)');
         [answers.first_name, answers.last_name, answers.role_id, answers.manager_id],
         console.log("Employee's role has been updated.");
+        startQuery();
     });
 };
 
