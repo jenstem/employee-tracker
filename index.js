@@ -178,4 +178,4 @@ function init() {
 }
 // Call init to initialize app
 startQuery();
-init();
+// init();
