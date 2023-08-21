@@ -175,5 +175,5 @@ function init() {
 
     })
 }
-// Call init to initialize app
+// Call function to initialize app
 startQuery();
