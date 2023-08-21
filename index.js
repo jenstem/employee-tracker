@@ -64,7 +64,7 @@ function viewAllRoles() {
 }
 
 function viewAllEmployees() {
-    db.promise().query('SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, department_id, role.salary, employee.manager_id FROM employee INNER JOIN department ON employee.department_id = department_id INNER JOIN role ON employee.role_id = role.id INNER JOIN role ON employee.role.salary = role.salary')
+    db.promise().query('SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, department_id, role.salary, employee.manager_id FROM employee INNER JOIN role ON employee.role_id = role.id')
     .then (function([rowsEmployee]) {
         let employeesEl = rowsEmployee;
         console.table(employeesEl);
@@ -77,14 +77,14 @@ function addDepartment() {
         {
             type: 'input',
             message: 'Please enter the name of the department.',
-            name: 'departments'
+            name: 'name'
         }
     ])
 
     .then ((answers) => {
-        db.query('INSERT INTO department (departments) VALUES (?)');
-        [answers.departments],
+        db.query('INSERT INTO department (name) VALUES (?)', [answers.name]);
         console.log('Department has been added.');
+        startQuery();
     });
 };
 
