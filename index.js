@@ -159,7 +159,8 @@ function addEmployee() {
 
 // Function to update an employee's role
 function updateRole() {
-    db.promise().query('SELECT * FROM employee');
+    db.promise().query('SELECT * FROM employee')
+    .then ((employee) => {
         inquirer.prompt([
             {
                 type: 'list',
@@ -176,7 +177,8 @@ function updateRole() {
                 message: 'Please enter the new role of the employee.',
                 name: 'role_id'
             }
-    ])
+    ])}
+)
     .then ((answers) => {
         db.promise().query('UPDATE employee (first_name, last_name, role_id) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
         console.log("Employee's role has been updated.");
