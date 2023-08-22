@@ -159,6 +159,10 @@ function addEmployee() {
 
 // Function to update an employee's role
 function updateRole() {
+    db.promise().query('SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, department_id, role.salary, employee.manager_id FROM employee INNER JOIN role ON employee.role_id = role.id')
+    .then (function([rowsEmployee]) {
+        let employeesEl = rowsEmployee;
+        console.log(employeesEl);
         inquirer.prompt([
             {
                 type: 'list',
@@ -173,13 +177,13 @@ function updateRole() {
                 message: 'Please enter the new role of the employee.',
                 name: 'role_id'
             }
-        ])
+    ])
     .then ((answers) => {
         db.promise().query('UPDATE employee (first_name, last_name, role_id) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
         console.log("Employee's role has been updated.");
         startQuery();
-    });
-};
+    })}
+    )};
 
 
 function init() {
