@@ -175,7 +175,7 @@ function updateRole() {
             }
         ])
     .then ((answers) => {
-        db.promise().query('UPDATE employee (employeesAll, newRole) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
+        db.promise().query('UPDATE employee (first_name, last_name, role_id) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
         console.log("Employee's role has been updated.");
         startQuery();
     });
