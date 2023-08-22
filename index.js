@@ -52,6 +52,7 @@ function viewAllDepartments() {
     .then (function([rows]) {
         let departments = rows;
         console.table(departments);
+        startQuery();
     })
 }
 
@@ -60,6 +61,7 @@ function viewAllRoles() {
     .then (function([rowsRole]) {
         let roles = rowsRole;
         console.table(roles);
+        startQuery();
     })
 }
 
@@ -68,6 +70,7 @@ function viewAllEmployees() {
     .then (function([rowsEmployee]) {
         let employeesEl = rowsEmployee;
         console.table(employeesEl);
+        startQuery();
     })
 }
 
@@ -111,7 +114,8 @@ function addRole() {
     ])
 
     .then ((answers) => {
-        db.query('INSERT INTO role (title, salary, department_id) VALUES (answers.title, answers.salary, answers.department_id)', [answers.title, answers.salary, answers.department_id]);
+        // db.query('INSERT INTO role (title, salary, department_id) VALUES (answers.title, answers.salary, answers.department_id)', [answers.title, answers.salary, answers.department_id]);
+        db.promise().query('INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)', [answers.title, answers.salary, answers.department_id]);
         console.log('Role has been added.');
         startQuery();
     });
@@ -146,8 +150,10 @@ function addEmployee() {
     ])
 
     .then ((answers) => {
-        db.query('INSERT INTO role (first_name, last_name, role_id, manager_id) VALUES (answers.first_name, answers.last_name, answers.role_id, answers.manager_id)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
+        // db.query('INSERT INTO role (first_name, last_name, role_id, manager_id) VALUES (answers.first_name, answers.last_name, answers.role_id, answers.manager_id)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
+        db.promise().query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
         console.log('Employee has been added.');
+        startQuery();
     });
 };
 
@@ -157,20 +163,19 @@ function updateRole() {
             {
                 type: 'list',
                 message: 'Please select one of the following employees:',
-                name: 'employeesAll',
+                name: 'employee.first_name, employee.last_name',
                 // Not sure what to put in choices?
-                choices: [employee.id]
+                choices: [employee.first_name, employee.last_name]
             },
 
             {
                 type: 'input',
                 message: 'Please enter the new role of the employee.',
-                name: 'newRole'
+                name: 'role_id'
             }
         ])
     .then ((answers) => {
-        db.query('UPDATE employee (employeesAll, newRole) VALUES (answers.employee.id, answers.role_id)');
-        [answers.first_name, answers.last_name, answers.role_id, answers.manager_id],
+        db.promise().query('UPDATE employee (employeesAll, newRole) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
         console.log("Employee's role has been updated.");
         startQuery();
     });
