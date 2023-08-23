@@ -76,7 +76,7 @@ This app is meant to help the user quickly and easily keep track of details rega
 *This is a screenshot of how updating an employee's role looks*
 ##
 
-[Click to watch the video!](https://youtu.be/Bu0hCR7xznU) <br>
+[Click to watch the video!](https://youtu.be/RX8-YfCXom0) <br>
 *This is a video of how to use the Note Taker app*
 ##
 
