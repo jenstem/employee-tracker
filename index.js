@@ -168,6 +168,13 @@ function updateRole() {
                 id: employee.employee_id,
                 value: [employee.full_name, employee.employee_id]
             }))
+
+            let rolesEl = results.map(role => ({
+                title: role.title,
+                id: role.id,
+                value: [role.title, role.id]
+            }));
+            console.log(rolesEl)
             console.log(employeesEl)
         }
 
