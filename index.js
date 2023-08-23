@@ -192,16 +192,19 @@ function updateRole() {
                     message: 'Please enter the new role of the employee.'
                 }
             ])
-        }
-
-    )
-
-//     .then ((answers) => {
-//         db.promise().query('UPDATE employee (first_name, last_name, role_id) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
-//         console.log("Employee's role has been updated.");
-//         startQuery();
-//     }
-//     );
+            .then((answer) => {
+                let updateId = answer.employee[1];
+                let updatedRole = answer.choosenRole[1];
+                db.query(`UPDATE employee SET role_id = ${updatedRole} WHERE id = ${updateId};`,
+                    function (err, results) {
+                        if (err) { throw err
+                        }
+                        console.table(results);
+                        startQuery();
+                    })
+            }
+            )
+    })
 };
 
 // Call function to initialize app
