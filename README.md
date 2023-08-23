@@ -91,7 +91,7 @@ GitHub URL:  https://github.com/jenstem
 
 I received help on the helper.js file and takeNotes.js file from a tutor, [Scott Everett](https://calendly.com/fsf-tutor-team/scott-everett?month=2023-06).
 
-I borrowed code from [w3schools.com](https://www.w3schools.com/sql/func_mysql_concat.asp).
+I borrowed code from [w3schools.com](https://www.w3schools.com/sql/func_mysql_concat.asp) and from [stackoverflow](https://stackoverflow.com/questions/11366006/mysql-join-on-vs-using).
 
 I also received help on the index.js file from BCS Learning Assistant, Mia, Rudie & Chris.
 
