@@ -187,12 +187,5 @@ function updateRole() {
     );
 };
 
-
-function init() {
-    inquirer.prompt(startQuery).then((answers) => {
-        console.log(answers);
-
-    })
-}
 // Call function to initialize app
 startQuery();
