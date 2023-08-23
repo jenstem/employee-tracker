@@ -174,30 +174,28 @@ function updateRole() {
                 id: role.id,
                 value: [role.title, role.id]
             }));
-            console.log(rolesEl)
+
             console.log(employeesEl)
+
+            inquirer.prompt([
+                {
+                  type: 'list',
+                  name: 'employee',
+                  choices: employeesEl,
+                  message: 'Please select one of the following employees:'
+                },
+
+                {
+                    type: 'list',
+                    name: 'choosenRole',
+                    choices: rolesEl,
+                    message: 'Please enter the new role of the employee.'
+                }
+            ])
         }
 
     )
-//     .then ((employee) => {
-//         inquirer.prompt([
-//             {
-//                 type: 'list',
-//                 message: 'Please select one of the following employees:',
-//                 name: 'id',
-//                 choices: employee.map((employee) => ({
-//                     name: 'employee.first_name AND employee.last_name',
-//                     value: employee.id
-//                 })),
-//             },
 
-//             {
-//                 type: 'input',
-//                 message: 'Please enter the new role of the employee.',
-//                 name: 'role_id'
-//             }
-//     ])}
-// )
 //     .then ((answers) => {
 //         db.promise().query('UPDATE employee (first_name, last_name, role_id) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
 //         console.log("Employee's role has been updated.");
