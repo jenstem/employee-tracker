@@ -4,7 +4,6 @@ VALUES ('Accounting'),
        ('Admin'),
        ('HR');
 
--- why isn't the department's id the same as department_id?
 INSERT INTO role (title, salary, department_id)
 VALUES ('Accountant', 65000, 1),
        ('Attorney', 120000, 2),
