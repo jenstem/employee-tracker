@@ -159,32 +159,33 @@ function addEmployee() {
 
 // Function to update an employee's role
 function updateRole() {
-    db.promise().query('SELECT * FROM employee')
-    .then ((employee) => {
-        inquirer.prompt([
-            {
-                type: 'list',
-                message: 'Please select one of the following employees:',
-                name: 'id',
-                choices: employee.map((employee) => ({
-                    name: 'employee.first_name AND employee.last_name',
-                    value: employee.id
-                })),
-            },
+    db.query('SELECT CONCAT(employee.first_name, " ", employee.last_name) AS full_name, employee.id AS employee_id, role.* FROM employee INNER JOIN role ON employee.role_id = role.id',
+    )
+//     .then ((employee) => {
+//         inquirer.prompt([
+//             {
+//                 type: 'list',
+//                 message: 'Please select one of the following employees:',
+//                 name: 'id',
+//                 choices: employee.map((employee) => ({
+//                     name: 'employee.first_name AND employee.last_name',
+//                     value: employee.id
+//                 })),
+//             },
 
-            {
-                type: 'input',
-                message: 'Please enter the new role of the employee.',
-                name: 'role_id'
-            }
-    ])}
-)
-    .then ((answers) => {
-        db.promise().query('UPDATE employee (first_name, last_name, role_id) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
-        console.log("Employee's role has been updated.");
-        startQuery();
-    }
-    );
+//             {
+//                 type: 'input',
+//                 message: 'Please enter the new role of the employee.',
+//                 name: 'role_id'
+//             }
+//     ])}
+// )
+//     .then ((answers) => {
+//         db.promise().query('UPDATE employee (first_name, last_name, role_id) VALUES (?, ?)', [answers.first_name, answers.last_name, answers.role_id, answers.manager_id]);
+//         console.log("Employee's role has been updated.");
+//         startQuery();
+//     }
+//     );
 };
 
 // Call function to initialize app
