@@ -89,7 +89,7 @@ GitHub URL:  https://github.com/jenstem
 <a id='notes'></a>
 ## Notes:
 
-I received help on the helper.js file and takeNotes.js file from a tutor, [Scott Everett](https://calendly.com/fsf-tutor-team/scott-everett?month=2023-06).
+I received help on the index.js file file from a tutor, [Scott Everett](https://calendly.com/fsf-tutor-team/scott-everett?month=2023-06).
 
 I borrowed code from [w3schools.com](https://www.w3schools.com/sql/func_mysql_concat.asp) and from [stackoverflow](https://stackoverflow.com/questions/11366006/mysql-join-on-vs-using).
 
