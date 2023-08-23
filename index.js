@@ -160,6 +160,17 @@ function addEmployee() {
 // Function to update an employee's role
 function updateRole() {
     db.query('SELECT CONCAT(employee.first_name, " ", employee.last_name) AS full_name, employee.id AS employee_id, role.* FROM employee INNER JOIN role ON employee.role_id = role.id',
+        function (err, results) {
+            if (err) throw err;
+
+            let employeesEl = results.map(employee => ({
+                full_name: employee.full_name,
+                id: employee.employee_id,
+                value: [employee.full_name, employee.employee_id]
+            }))
+            console.log(employeesEl)
+        }
+
     )
 //     .then ((employee) => {
 //         inquirer.prompt([
